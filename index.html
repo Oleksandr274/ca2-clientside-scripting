@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My ASSIGNMANT</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div style="text-align: center;">
+        <h1>Pizzeria "Rapid Star"</h1>
+    </div>
+
+    <div id="pizzas-block">
+        <details id="pizzas-details">
+            <summary>Pizzas</summary>
+            <!-- Pizza Filter-->
+            <div class="pizza-filter"
+                style="background-color: bisque; border: solid 1px blue; margin: 30px; padding: 30px ;">
+                <div>
+                    <label for="search-pizza">Pizza name:</label>
+                    <input type="text" id="search-pizza" name="pizza-name">
+                    <button id="btn-pizza-search">Search</button>
+                </div>
+                <div>
+                    <input type="checkbox" id="veg-type-checkbox">
+                    <label for="veg-type-checkbox">Vegetarian</label>
+                </div>
+                <div>
+                    <label for="pizza-min-price">Min price:</label>
+                    <input type="number" id="pizza-min-price" min="0"><br>
+                    <button id="btn-pizza-filter">Filter</button>
+                </div>
+            </div>
+            <!-- Pizza container-->
+            <div id="pizzas-container"></div>
+        </details>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
