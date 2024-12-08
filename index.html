@@ -16,22 +16,25 @@
     <div id="pizzas-block">
         <details id="pizzas-details">
             <summary>Pizzas</summary>
-            <!-- Pizza Filter-->
-            <div class="pizza-filter"
-                style="background-color: bisque; border: solid 1px blue; margin: 30px; padding: 30px ;">
+            <!-- Pizza Search and Filter -->
+            <div class="search-filter-items">
                 <div>
+                    <h3>Search</h3>
                     <label for="search-pizza">Pizza name:</label>
                     <input type="text" id="search-pizza" name="pizza-name">
                     <button id="btn-pizza-search">Search</button>
                 </div>
                 <div>
-                    <input type="checkbox" id="veg-type-checkbox">
-                    <label for="veg-type-checkbox">Vegetarian</label>
-                </div>
-                <div>
-                    <label for="pizza-min-price">Min price:</label>
-                    <input type="number" id="pizza-min-price" min="0"><br>
-                    <button id="btn-pizza-filter">Filter</button>
+                    <h3>Filter</h3>
+                    <div>
+                        <input type="checkbox" id="veg-type-checkbox">
+                        <label for="veg-type-checkbox">Vegetarian</label>
+                    </div>
+                    <div>
+                        <label for="pizza-min-price">Min price:</label>
+                        <input type="number" id="pizza-min-price" min="0" value="0">
+                        <button id="btn-pizza-filter">Filter</button>
+                    </div>
                 </div>
             </div>
             <!-- Pizza container-->

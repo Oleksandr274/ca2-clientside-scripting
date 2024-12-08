@@ -9,10 +9,36 @@ p {
 }
 
 
-details summary{
+details summary {
     margin-left: 10px;
     font-size: 34px;
     font-weight: bolder;
+}
+
+.search-filter-items {
+    background-color: bisque;
+    border: solid 1px rgb(144, 144, 194);
+    width: 700px;
+    margin: 30px 0px 40px 100px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 15px;
+    box-shadow: 5px 5px 5px 5px rgb(132, 132, 132)
+}
+
+.search-filter-items > div {
+    background-color: rgb(246, 207, 160);
+    padding: 10px 0px 7px 10px;
+}
+
+.search-filter-items > div > h3{
+    margin: 0px 0px 3px 10px;
+}
+
+#btn-pizza-search, #btn-pizza-filter {
+    margin-top: 5px;
+    display: block;
 }
 
 
@@ -37,19 +63,20 @@ details summary{
 
 .pizza-card {
     background-color: rgb(255, 208, 174);
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
     box-shadow: 5px 5px 5px 5px rgb(132, 132, 132);
 }
 
 .pizza-card:hover {
     background-color: rgb(255, 208, 174);
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
-    box-shadow: 6px 6px 5px 7px rgb(100, 100, 100);;
+    box-shadow: 6px 6px 5px 7px rgb(100, 100, 100);
+    ;
 }
 
-.pizza-card > * {
+.pizza-card>* {
     margin-bottom: 3px;
 }
 
@@ -61,7 +88,7 @@ details summary{
     margin-bottom: 3px;
 }
 
-.pizza-info > * {
+.pizza-info>* {
     padding-left: 10px;
     margin-bottom: 5px;
 }
