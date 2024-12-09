@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My ASSIGNMANT</title>
+    <title>APIs</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -37,11 +37,10 @@
                     </div>
                 </div>
             </div>
-            <!-- Pizza container-->
+            <!-- Pizzas container-->
             <div id="pizzas-container"></div>
         </details>
     </div>
-
 
     <div class="items-block">
         <details id="desserts-details">
@@ -65,6 +64,33 @@
             </div>
             <!-- Desserts container-->
             <div id="desserts-container"></div>
+        </details>
+    </div>
+
+    <div class="items-block">
+        <details id="drinks-details">
+            <summary>Drinks</summary>
+            <!-- Drink Search and Filter -->
+            <div class="search-filter-items">
+                <div>
+                    <h3>Search</h3>
+                    <label for="search-drink">Drink name:</label>
+                    <input type="text" id="search-drink" name="drink-name">
+                    <button id="btn-drink-search">Search</button>
+                </div>
+                <div>
+                    <h3>Filter</h3>
+                    <div>
+                        <label for="drink-category">Category</label>
+                        <select name="drink-categories" id="drink-categories">
+                            <option value="default" selected="selected">All Categories</option>
+                        </select>
+                        <button id="btn-drink-filter">Filter</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Drinks container-->
+            <div id="drinks-container"></div>
         </details>
     </div>
 

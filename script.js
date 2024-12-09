@@ -1,4 +1,4 @@
-/* Pizza */
+// ----------Pizzas----------
 
 // fetch pizza information on openning details
 const pizzasDetails = document.getElementById('pizzas-details');
@@ -33,7 +33,7 @@ pizzaBtnFilter.addEventListener('click', () => {
 
     let isVeg = pizzaVegTypeCheckbox.checked;
     let minPrice = Number(pizzaMinPriceInput.value)
-    if(isNaN(minPrice) || minPrice < 0){
+    if (isNaN(minPrice) || minPrice < 0) {
         minPrice = 0;
         pizzaMinPriceInput.value = 0;
     }
@@ -72,8 +72,9 @@ async function fetchPizzas(pizzaName, filterOption) {
 
             filteredPizzas = pizzas.filter(pizza => pizza.price >= filterOption.minPrice)
 
-            if(filterOption.isVeg)
-                filteredPizzas = filteredPizzas.filter(pizza => pizza.veg == true );
+            if (filterOption.isVeg)
+                filteredPizzas = filteredPizzas.filter(pizza => pizza.veg == true);
+            
             displayPizzas(filteredPizzas);
         }
         else {
@@ -160,9 +161,9 @@ function displayPizzas(pizzas) {
 
 
 
-/* Desserts */
+// ----------Desserts----------
 
-// fetch pizza information on openning details
+// fetch desserts information on openning details
 const dessertsDetails = document.getElementById('desserts-details');
 dessertsDetails.addEventListener("toggle", () => {
     if (dessertsDetails.hasAttribute("open"))
@@ -192,12 +193,12 @@ dessertBtnFilter.addEventListener('click', () => {
     dessertSearchInput.value = "";
 
     let minPrice = Number(dessertMinPriceInput.value)
-    if(isNaN(minPrice) || minPrice < 0){
+    if (isNaN(minPrice) || minPrice < 0) {
         minPrice = 0;
         dessertMinPriceInput.value = 0;
     }
     console.log(minPrice);
-    fetchDesserts(null, minPrice );
+    fetchDesserts(null, minPrice);
 });
 
 // Fetch and display desserts
@@ -218,6 +219,7 @@ async function fetchDesserts(dessertName, minPrice) {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
+
         const desserts = await response.json();
 
         // display desserts depending on user's request
@@ -283,7 +285,7 @@ function displayDesserts(desserts) {
         priceParag.style.display = "inline-block"
         dessertPrice.appendChild(priceParag);
 
-        //add description, vegetarian type, price to dessert info
+        //add description, price to dessert info
         dessertInfoDiv.appendChild(dessertDescription);
         dessertInfoDiv.appendChild(dessertPrice);
 
@@ -297,4 +299,186 @@ function displayDesserts(desserts) {
         //add dessert card to desserts container
         dessertsContainer.appendChild(dessertCard);
     })
+}
+
+
+
+// ----------Drinks----------
+// fetch drinks information on openning details
+const drinksDetails = document.getElementById('drinks-details');
+drinksDetails.addEventListener("toggle", () => {
+    if (drinksDetails.hasAttribute("open"))
+        fetchDrinks(null, null);
+});
+
+
+// assign html elements to variables
+const drinkBtnSearch = document.getElementById('btn-drink-search');
+const drinkSearchInput = document.getElementById('search-drink');
+const drinkCategsSelect = document.getElementById('drink-categories');
+const drinkBtnFilter = document.getElementById('btn-drink-filter');
+
+
+// add event listener to search drink button
+drinkBtnSearch.addEventListener('click', () => {
+    // reset filter values to default
+    drinkCategsSelect.value = 'default';
+
+    console.log(drinkSearchInput.value);
+    fetchDrinks(drinkSearchInput.value, null);
+});
+
+// add event listener to filter drink button
+drinkBtnFilter.addEventListener('click', () => {
+    // reset search input to default
+    drinkSearchInput.value = "";
+
+    const selectedOption = drinkCategsSelect.value;
+
+    fetchDrinks(null, selectedOption);
+});
+
+// Fetch and display drinks
+async function fetchDrinks(drinkName, drinkCateg) {
+
+    // API URL and options
+    const url = 'https://starbucks-coffee-db2.p.rapidapi.com/api/recipes';
+    const options = {
+        method: 'GET',
+        headers: {
+            'x-rapidapi-key': 'c1a9fa6a9emsha7ec5f75b7bfd01p1c0300jsn1426eea4383e',
+            'x-rapidapi-host': 'starbucks-coffee-db2.p.rapidapi.com'
+        }
+    };
+
+    try {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const drinks = await response.json();
+
+        // get drink categories and display them in filter options
+        if (drinkCategsSelect.options.length == 1) {
+            let drinkCategories = [];
+            drinks.forEach(drink => {
+                let drinkCategory = drink.category;
+                drinkCategories.push(drinkCategory);
+            });
+            drinkCategories = [...new Set(drinkCategories)];
+            console.log(drinkCategories);
+            displayDrinkCategories(drinkCategories);
+        }
+
+        // display drinks depending on user's request
+        if (drinkName != null) {
+            const searchedDrinks = drinks.filter(drink => drink.name.includes(drinkName));
+            displayDrinks(searchedDrinks);
+        }
+        else if (drinkCateg != null && drinkCateg != "default") {
+            const filteredDrinks = drinks.filter(drink => drink.category == drinkCateg);
+            displayDrinks(filteredDrinks);
+        }
+        else {
+            displayDrinks(drinks);
+        }
+
+    }
+    catch (error) {
+        document.getElementById('drinks-container').textContent = `Error fetching drinks data: ${error.message}`;
+    }
+}
+
+// Function to display drinks
+function displayDrinks(drinks) {
+    const drinksContainer = document.getElementById('drinks-container');
+    drinksContainer.innerHTML = "";
+
+    drinks.forEach(drink => {
+        //create drink card element
+        const drinkCard = document.createElement('div');
+        drinkCard.classList.add("item-card");
+
+        //create drink image 
+        const drinkImage = document.createElement('img');
+        drinkImage.setAttribute('src', drink.image);
+        drinkImage.setAttribute('alt', drink.name);
+        drinkImage.style.width = "100%";
+        drinkImage.style.height = "auto";
+
+
+        //create drink name
+        const drinkNameDiv = document.createElement('div');
+        drinkNameDiv.classList.add('item-name');
+        drinkNameDiv.innerText = drink.name;
+
+
+        //create drink information
+        const drinkInfoDiv = document.createElement('div');
+        drinkInfoDiv.classList.add('item-info');
+
+        //create drink description paragraph
+        const drinkDescription = document.createElement('p');
+        drinkDescription.innerText = drink.description;
+
+        //create category with bold label and category value
+        const drinkCategory = document.createElement('p');
+        const categoryLabelSpan = document.createElement('span');
+        categoryLabelSpan.innerText = "Category: ";
+        categoryLabelSpan.style.fontWeight = "bold";
+        drinkCategory.appendChild(categoryLabelSpan);
+
+        const categoryParag = document.createElement('p');
+        categoryParag.innerText = drink.category;
+        categoryParag.style.display = "inline-block"
+        drinkCategory.appendChild(categoryParag);
+
+
+        //add description, category to drink info
+        drinkInfoDiv.appendChild(drinkDescription);
+        drinkInfoDiv.appendChild(drinkCategory);
+
+
+        // create ingridients list 
+        const drinkIngridsDiv = document.createElement('div');
+        drinkIngridsDiv.hidden = true;
+        const drinkIngridsList = document.createElement('ul');
+        drink.recipeIngredient.forEach(indridient => {
+            let listItem = document.createElement('li');
+            listItem.innerText = indridient;
+            drinkIngridsList.appendChild(listItem);
+        })
+        drinkIngridsDiv.appendChild(drinkIngridsList);
+
+        // create show ingridients button 
+        // with event listener to show/hide ingridients
+        const showIngridsBtn = document.createElement('button');
+        showIngridsBtn.innerText = "Show Ingridients";
+        showIngridsBtn.addEventListener('click', () => {
+            drinkIngridsDiv.hidden = !drinkIngridsDiv.hidden;
+            showIngridsBtn.innerText = (drinkIngridsDiv.hidden ? "Show" : "Hide") + " Ingridients";
+        });
+
+
+        //add all elements to drink card
+        drinkCard.appendChild(drinkImage);
+        drinkCard.appendChild(drinkNameDiv);
+        drinkCard.appendChild(drinkInfoDiv);
+        drinkCard.appendChild(showIngridsBtn);
+        drinkCard.appendChild(drinkIngridsDiv);
+
+
+        //add drink card to drinks container
+        drinksContainer.appendChild(drinkCard);
+    })
+}
+
+// function to display drink categories in filter 
+function displayDrinkCategories(categories) {
+    categories.forEach(category => {
+        let categOption = document.createElement('option');
+        categOption.value = category;
+        categOption.innerText = category;
+        drinkCategsSelect.add(categOption);
+    });
 }

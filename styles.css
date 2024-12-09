@@ -48,7 +48,7 @@ details summary {
     display: block;
 }
 
-#pizzas-container, #desserts-container {
+#pizzas-container, #desserts-container, #drinks-container {
     padding-left: 30px;
     padding-right: 30px;
     display: grid;
@@ -88,4 +88,8 @@ details summary {
 .item-info > * {
     padding-left: 10px;
     margin-bottom: 5px;
+}
+
+.item-card > button {
+    margin-left: 10px;
 }
