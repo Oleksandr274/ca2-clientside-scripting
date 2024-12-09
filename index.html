@@ -13,7 +13,7 @@
         <h1>Pizzeria "Rapid Star"</h1>
     </div>
 
-    <div id="pizzas-block">
+    <div class="items-block">
         <details id="pizzas-details">
             <summary>Pizzas</summary>
             <!-- Pizza Search and Filter -->
@@ -39,6 +39,32 @@
             </div>
             <!-- Pizza container-->
             <div id="pizzas-container"></div>
+        </details>
+    </div>
+
+
+    <div class="items-block">
+        <details id="desserts-details">
+            <summary>Desserts</summary>
+            <!-- Dessert Search and Filter -->
+            <div class="search-filter-items">
+                <div>
+                    <h3>Search</h3>
+                    <label for="search-dessert">Dessert name:</label>
+                    <input type="text" id="search-dessert" name="dessert-name">
+                    <button id="btn-dessert-search">Search</button>
+                </div>
+                <div>
+                    <h3>Filter</h3>
+                    <div>
+                        <label for="dessert-min-price">Min price:</label>
+                        <input type="number" id="dessert-min-price" min="0" value="0">
+                        <button id="btn-dessert-filter">Filter</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Desserts container-->
+            <div id="desserts-container"></div>
         </details>
     </div>
 
